@@ -6,78 +6,107 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:44 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/08 13:43:30 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/09 10:44:13 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	count_words(const char *string, char c)
-{
-	int		word_flag;
-	size_t	number_of_words;
-
-	word_flag = 0;
-	number_of_words = 0;
-	while (string)
-	{
-		if (*string != c && word_flag == 0)
-		{
-			word_flag++;
-			number_of_words++;
-		}
-		else if (*string == c && word_flag > 0)
-			word_flag = 0;
-		string++;
-	}
-	return (number_of_words);
-}
-
-static int	ft_word(char **all, const char *read, char sep)
+static size_t	word_count(const char *s, char c)
 {
 	size_t	i;
 	size_t	count;
 
 	i = 0;
 	count = 0;
-	while (*read)
+	while (s[i] != '\0')
 	{
-		while (*read == sep)
-			read++;
-		count = 0;
-		while (read[count] != sep && read[count])
-			count++;
-		if (count > 0)
-		{
-			all[i] = ft_substr(read, 0, count);
-			if (!all[i])
-				return (0);
+		while (s[i] == c)
 			i++;
+		if (s[i] != '\0')
+			count++;
+		while (s[i] != c && s[i] != '\0')
+			i++;
+	}
+	return (count);
+}
+
+static void	clean_array(char **array_of_words, int i)
+{
+	while (i > 0)
+		free(array_of_words[--i]);
+	free(array_of_words);
+}
+
+static int	copy_word(char **array, const char *s, int *i, char c)
+{
+	int	word_length;
+
+	word_length = *i;
+	while (s[word_length] != c && s[word_length] != '\0')
+		word_length++;
+	word_length -= *i;
+	*array = malloc(sizeof(char) * (word_length + 1));
+	if (!*array)
+		return (0);
+	ft_strlcpy(*array, s + *i, word_length + 1);
+	*i += word_length;
+	return (1);
+}
+
+static int	split_string(char ***array_of_words, const char *s, char c)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (s[i] != '\0')
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i] != '\0')
+		{
+			if (!copy_word(&(*array_of_words)[j], s, &i, c))
+			{
+				clean_array(*array_of_words, j);
+				return (0);
+			}
+			j++;
 		}
-		read += count;
 	}
 	return (1);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	char	**strings_array;
-	size_t	i;
-	size_t	words_count;
+	char	**array_of_words;
+	size_t	size_of_array;
 
 	if (!s)
 		return (NULL);
-	words_count = count_words(s, c);
-	strings_array = malloc(sizeof(char *) * (words_count + 1));
-	if (!strings_array)
+	size_of_array = word_count(s, c);
+	array_of_words = malloc(sizeof(char *) * (size_of_array + 1));
+	if (!array_of_words)
 		return (NULL);
-	strings_array[words_count] = NULL;
-	if (!ft_word(strings_array, s, c))
+	array_of_words[size_of_array] = NULL;
+	if (!split_string(&array_of_words, s, c))
 	{
-		while (i < words_count)
-			free(strings_array[i++]);
-		free(strings_array);
+		free(array_of_words);
 		return (NULL);
 	}
-	return (strings_array);
+	return (array_of_words);
+}
+
+int	main(void)
+{
+	char **word = ft_split(" hello world  ", ' ');
+	int i = 0;
+	while (word[i] != NULL)
+	{
+		printf ("%s\n", word[i]);
+		i++;
+	}
+	clean_array(word, i);
+	return (0);
 }
