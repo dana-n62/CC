@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:45:41 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/06 10:45:43 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/10 11:16:22 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	ft_isalnum(int c)
 {
 	if (ft_isalpha(c) || ft_isdigit(c))
-		return (c);
+		return (1);
 	return (0);
 }

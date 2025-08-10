@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:55 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/06 10:46:56 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/10 13:16:53 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	size_t	j;
 
 	i = ft_strlen(dest);
-	total = i + ft_strlen(src);
+	if (i >= size)
+		return (size + ft_strlen(src));
+	total = i + size;
 	if ((int)size > 0)
 	{
 		j = 0;

@@ -6,12 +6,12 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:45:12 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/09 10:51:17 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/10 10:37:16 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+//changes a sttring into an integer without handeling overflow
 static int	ft_isspace(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v')

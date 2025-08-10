@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:12:58 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/09 11:32:17 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/10 10:28:44 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIBFT_H
 
 # include <stddef.h>
-# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
