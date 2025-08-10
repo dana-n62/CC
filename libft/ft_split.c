@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:44 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/09 10:44:13 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/09 10:46:47 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,4 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	}
 	return (array_of_words);
-}
-
-int	main(void)
-{
-	char **word = ft_split(" hello world  ", ' ');
-	int i = 0;
-	while (word[i] != NULL)
-	{
-		printf ("%s\n", word[i]);
-		i++;
-	}
-	clean_array(word, i);
-	return (0);
 }

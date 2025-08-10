@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:45:12 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/06 11:05:25 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/09 10:51:17 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ int	ft_atoi(const char *str)
 	i = 0;
 	while (ft_isspace(str[i]))
 		i++;
-	if (str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 	{
-		sign = -1;
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
-	else if (str[i] == '+')
-		i++;
 	while (str[i] != '\0')
 	{
 		if (str[i] < '0' || str[i] > '9')

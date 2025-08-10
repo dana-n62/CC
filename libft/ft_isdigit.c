@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:45:55 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/06 10:45:56 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/09 11:31:54 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 int	ft_isdigit(int c)
 {
-	if (c >= 0 && c <= 9)
+	if (c >= '0' && c <= '9')
 		return (c);
+	return (0);
+}
+ int main()
+{
+	printf("%d\n", ft_isdigit(50));
+	printf("%d\n", isdigit(50));
 	return (0);
 }

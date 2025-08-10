@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:12:58 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/07 11:09:58 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/09 11:32:17 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <ctype.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -53,5 +54,5 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void 	ft_putnbr_fd(int n, int fd);
+void	ft_putnbr_fd(int n, int fd);
 #endif
