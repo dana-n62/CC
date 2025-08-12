@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:15 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/06 11:05:15 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/11 21:59:58 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 int	ft_memcmp(const void *str1, const void *str2, size_t n)
 {
-	size_t			i;
-	unsigned char	*c_str1;
-	unsigned char	*c_str2;
+	const unsigned char	*val1;
+	const unsigned char	*val2;
 
-	i = 0;
-	c_str1 = (unsigned char *)str1;
-	c_str2 = (unsigned char *)str2;
+	val1 = (const unsigned char *)str1;
+	val2 = (const unsigned char *)str2;
 	if (n == 0)
 		return (0);
-	while (i <= n)
+	while ((n - 1) > 0 && (*val1 == *val2))
 	{
-		if (c_str1[i] < c_str2[i] || c_str1[i] > c_str2[i])
-			break ;
-		i++;
+		val1++;
+		val2++;
+		n--;
 	}
-	return (c_str1[i] - c_str2[i]);
+	return (*val1 - *val2);
 }

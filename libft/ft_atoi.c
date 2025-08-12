@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:45:12 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/10 10:37:16 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/11 22:17:12 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] != '\0')
 	{
-		if (str[i] < '0' || str[i] > '9')
-			break ;
+		if (!ft_isdigit(str[i]))
+			return (0);
 		number = number * 10 + (str[i] - 48);
 		i++;
 	}

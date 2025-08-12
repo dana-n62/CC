@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:45:38 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/06 10:52:27 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/11 22:11:39 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	*ft_calloc(size_t number, size_t size)
 {
 	void	*array;
 
+	if (number == 0 && size == 0)
+	{
+		number = 1;
+		size = 1;
+	}
 	array = malloc(number * size);
 	if (!array)
 		return (NULL);

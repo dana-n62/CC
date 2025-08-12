@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:47 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/06 11:09:54 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/11 21:50:28 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strdup(const char *str)
 	char	*duplicate;
 	size_t	str_len;
 
-	if (!str)
-		return (NULL);
 	str_len = ft_strlen(str);
 	duplicate = malloc((str_len + 1) * sizeof(char));
 	if (!duplicate)

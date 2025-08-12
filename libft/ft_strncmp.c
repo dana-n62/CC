@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:47:04 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/10 13:11:11 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/11 22:00:57 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n)
 	size_t	i;
 
 	i = 0;
-	if (!str1 || !str2)
-		return (0);
-	while (i < n)
+	while (*str1 != '\0' && (*str1 == *str2) && i < n)
 	{
-		if (str1[i] != str2[i])
-			break ;
-		i++;
+		str1++;
+		str2++;
+		n--;
 	}
-	return (str1[i] - str2[i]);
+	if (n == 0)
+		return (0);
+	return (*(unsigned char *)str1 - *(unsigned char *)str2);
 }

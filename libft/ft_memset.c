@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:31 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/10 11:36:55 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/11 12:30:24 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	*ft_memset(void *arr, int value, size_t length)
 	unsigned char	*string;
 	size_t			i;
 
-	if (!arr || length == 0)
-		return (NULL);
 	i = 0;
 	string = (unsigned char *)arr;
 	while (i < length)
