@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:05 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/10 14:38:24 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/12 14:13:52 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	*ft_itoa(int n)
 
 	if (n == INT_MIN)
 		return (ft_strdup("-2147483648"));
-	n = (long) n;
 	n_length = length(n);
 	number = malloc(sizeof(char) * (length(n) + 1));
 	if (!number)

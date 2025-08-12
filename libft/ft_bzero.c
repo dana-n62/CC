@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:45:33 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/11 21:58:09 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/12 14:15:38 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	*ft_bzero(void *arr, size_t length)
 {
 	ft_memset(arr, '\0', length);
-	return(arr);
+	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:10 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/11 21:42:44 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/12 13:21:34 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memchr(const void *str, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (c_str[i] != c)
+		if (c_str[i] != (char)c)
 			i++;
 		else
 			return ((char *)str + i);

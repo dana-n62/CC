@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:19 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/11 22:06:25 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/12 11:29:09 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	const char		*c_src;
 	size_t			i;
 
+	if (!dest && !src)
+		return (NULL);
 	c_dest = (unsigned char *)dest;
 	c_src = (const char *)src;
 	i = 0;
