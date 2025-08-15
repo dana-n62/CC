@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:46:44 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/09 10:46:47 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/08/15 10:03:45 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,6 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	array_of_words[size_of_array] = NULL;
 	if (!split_string(&array_of_words, s, c))
-	{
-		free(array_of_words);
 		return (NULL);
-	}
 	return (array_of_words);
 }
