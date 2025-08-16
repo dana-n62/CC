@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 //finds the given characters location and return the string starting there
 char	*ft_strchr(const char *str, int c)
 {
