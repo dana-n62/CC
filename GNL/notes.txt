@@ -1,0 +1,4 @@
+**	fd = open("read.txt", O_RDWR | O_CREAT, 0744) setting the permissions for the newly created file: 0(means c=octal value), 7(4+2+1 means user has all permissions) 4(means groups can only read, 4(means everyone can only read)
+** //ft_putstr_fd("Lorem ipsum dolor sit amet. Morbi ut ultricies lectus.", fd); //this line sets the file at the end of it, so it will cause errors for the read later
+	//close(fd);						// by closing the file and reopening it we reset the start of it for the read to use it from the begining
+	//fd = open("read.txt", O_RDWR);
