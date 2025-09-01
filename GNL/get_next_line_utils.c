@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:49:40 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/28 10:46:06 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/01 10:58:38 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ void	ft_putstr_fd(char *s, int fd)
 size_t	ft_strlcpy(char *dest, const char *src, size_t dsize)
 {
 	size_t	i;
-	size_t	ssize;
+//	size_t	ssize;
 
 	i = 0;
-	ssize = ft_strlen(src);
+	if (!src || !dest)
+		return (0);
 	if (dsize > 0)
 	{
 		while (i < (dsize - 1) && src[i] != '\0')
@@ -43,7 +44,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dsize)
 		}
 		dest[i] = '\0';
 	}
-	return (ssize);
+	return (1);
 }
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {

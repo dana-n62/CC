@@ -6,32 +6,37 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:49:35 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/28 12:28:35 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/01 11:11:50 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*find_new_line(char **remaining, char *current_read, int fd)
+static char	*find_new_line(char **remaining, char *current_read)
 {
 	char	*new_line;
 	size_t	i;
-	size_t	size;
+	size_t	source_size;
 
 	i = 0;
+	source_size = ft_strlen(current_read);
 	while (i < BUFFER_SIZE && current_read[i] != '\0')
 	{
 		if (current_read[i] == '\n')
 		{
-			size = ft_strlen(current_read + i + 1);
-			if (*remaining == 0)
-				ft_strlcpy(*remaining, current_read + i, size);
+			if (*remaining == NULL)
+			{
+				*remaining = malloc(i + 1);
+				if (!*remaining)
+					return (NULL);
+				ft_strlcpy(*remaining, current_read + i, source_size - i);
+			}
 			else
-				ft_strlcat(*remaining, current_read + i, size);
+				ft_strlcat(*remaining, current_read + i, source_size - i);
 			new_line = malloc(i + 1);
 			if (!new_line)
 				return(NULL);
-			ft_strlcpy(new_line, current_read, size - i);
+			ft_strlcpy(new_line, current_read, i + 1);
 			return (new_line);
 		}
 		i++;
@@ -51,11 +56,12 @@ char	*get_next_line(int fd)
 	if (read_bytes > 0)
 	{
 		read_data[BUFFER_SIZE + 1] = '\0';
-		read_data = find_new_line(&remainig_data, read_data, fd);
+		read_data = find_new_line(&remainig_data, read_data);
 	}
 	else
 	{
 		free(read_data);
+		free(remainig_data);
 		return (NULL);
 	}
 	return (read_data);
