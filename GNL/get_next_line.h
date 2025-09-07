@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:46:28 by DaNa              #+#    #+#             */
-/*   Updated: 2025/08/28 10:02:12 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/02 18:24:58 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define GET_NEXT_LINE_H
 
 #ifndef BUFFER_SIZE //to allow redifing it during compilation
-# define BUFFER_SIZE 100	//when i used int and =  it replaced all int with the 100 value causing an error
+# define BUFFER_SIZE 10	//when i used int and =  it replaced all int with the 100 value causing an error
 # endif
 
 # include <stdio.h>

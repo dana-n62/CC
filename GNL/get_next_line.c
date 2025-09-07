@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:49:35 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/01 11:11:50 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/03 10:00:21 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*find_new_line(char **remaining, char *current_read)
 				ft_strlcat(*remaining, current_read + i, source_size - i);
 			new_line = malloc(i + 1);
 			if (!new_line)
-				return(NULL);
+				return (NULL);
 			ft_strlcpy(new_line, current_read, i + 1);
 			return (new_line);
 		}
@@ -43,11 +43,12 @@ static char	*find_new_line(char **remaining, char *current_read)
 	}
 	return (current_read);
 }
+
 char	*get_next_line(int fd)
 {
-	static char *remainig_data;
-	char	*read_data;
-	ssize_t	read_bytes;
+	static char	*remainig_data = NULL;
+	char		*read_data;
+	ssize_t		read_bytes;
 
 	read_data = malloc(BUFFER_SIZE + 1);
 	if (!read_data)
