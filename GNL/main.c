@@ -5,26 +5,18 @@ int	main(void)
 {
 	int	fd;
 	char	*buffer;
-	/* fd = open("read2.txt", O_RDWR | O_CREAT, 0744);
-	if (fd == -1)
-	{
-		perror("error");
-	}
-	ft_putstr_fd("Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nMorbi ut ultricies lectus.", fd); */
-	fd = open("read2.txt", O_RDWR);
-	buffer = get_next_line(fd);
+
+	fd = open("read2.txt", O_RDONLY);
+	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
+		return(-1);
+	buffer = get_next_line(fd);
+	while (buffer)
 	{
-		close(fd);
-		return (-1);
-	}
-	while (buffer != NULL)
-	{
-		printf("%s\n", buffer);
-		free(buffer);
+		printf("%s", buffer);
 		buffer = get_next_line(fd);
 	}
-	close(fd);
 	free(buffer);
+	close(fd);
 	return (0);
 }

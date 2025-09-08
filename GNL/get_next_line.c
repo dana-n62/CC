@@ -12,18 +12,24 @@
 
 #include "get_next_line.h"
 
-static char	*find_new_line(char **remaining, char *current_read)
+static char	*find_line(int fd, ssize_t read_bytes, char **remaining)
 {
-	char	*new_line;
+	char	*found;
+	char	*line;
 	size_t	i;
-	size_t	source_size;
-
+	
+	found = NULL;
 	i = 0;
-	source_size = ft_strlen(current_read);
-	while (i < BUFFER_SIZE && current_read[i] != '\0')
+	line = malloc(BUFFER_SIZE + 1);
+	if (!line)
+		return (NULL);
+	while (read_bytes > 0 || *remaining)
 	{
-		if (current_read[i] == '\n')
+		if (*remaining)
+			i = ft_strchr(*remaining, '\n');
+		if (i > 0)
 		{
+<<<<<<< HEAD
 			if (*remaining == NULL)
 			{
 				*remaining = malloc(i + 1);
@@ -38,32 +44,50 @@ static char	*find_new_line(char **remaining, char *current_read)
 				return (NULL);
 			ft_strlcpy(new_line, current_read, i + 1);
 			return (new_line);
+=======
+			found = malloc(i + 1);
+			if (!found)
+				return (NULL);
+			ft_memmove(found, *remaining, i + 1);
+			ft_memmove(*remaining, *remaining + i, ft_strlen(*remaining));
+			free(line);
+			return (found);
+>>>>>>> 366ce06 (updated the whole work)
 		}
-		i++;
+		else
+			*remaining = ft_strjoin(*remaining, line);
+		read_bytes = read(fd, line, BUFFER_SIZE);
 	}
-	return (current_read);
+	free(line);
+	free(found);
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
+<<<<<<< HEAD
 	static char	*remainig_data = NULL;
 	char		*read_data;
 	ssize_t		read_bytes;
 
 	read_data = malloc(BUFFER_SIZE + 1);
 	if (!read_data)
+=======
+	static char	*remaining_data;
+	ssize_t	read_bytes;
+	char	*read_line;
+	
+	read_line = malloc(BUFFER_SIZE + 1);
+	if (!read_line)
+>>>>>>> 366ce06 (updated the whole work)
 		return (NULL);
-	read_bytes = read(fd, read_data, BUFFER_SIZE);
-	if (read_bytes > 0)
+	read_bytes = read(fd, read_line, BUFFER_SIZE);
+	if (read_bytes > 0 || remaining_data)
+		read_line = find_line(fd, read_bytes, &remaining_data);
+	if (read_bytes <= 0 && remaining_data == NULL)
 	{
-		read_data[BUFFER_SIZE + 1] = '\0';
-		read_data = find_new_line(&remainig_data, read_data);
-	}
-	else
-	{
-		free(read_data);
-		free(remainig_data);
+		free(read_line);
 		return (NULL);
 	}
-	return (read_data);
+	return (read_line);
 }

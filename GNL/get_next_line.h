@@ -24,8 +24,11 @@
 # include <fcntl.h>
 
 char	*get_next_line(int fd);
-void	ft_putstr_fd(char *s, int fd);
-size_t	ft_strlcpy(char *dest, const char *src, size_t dsize);
-size_t	ft_strlcat(char *dest, const char *src, size_t size);
+size_t     ft_strchr(const char *str, int c);
 size_t	ft_strlen(const char *str);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlcat(char *dest, const char *src, size_t size);
+//char	*ft_strdup(const char *str);
+void	*ft_memmove(void *dest, const void *src, size_t n);
+
 # endif
