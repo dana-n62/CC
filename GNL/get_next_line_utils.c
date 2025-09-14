@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:49:40 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/14 09:07:12 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/14 13:18:29 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
 	size_t	ssize;
+	size_t	i;
 
 	if (!s)
 		return (NULL);
+	i = 0;
 	ssize = ft_strlen(s);
 	if (start >= ssize)
 		return (ft_strdup(""));
@@ -42,7 +44,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	substr = malloc(len + 1);
 	if (!substr)
 		return (NULL);
-	ft_strlcpy(substr, s + start, len + 1);
+	while (i < len && s[i] != '\0')
+	{
+		substr[i] = s[i];
+		i++;
+	}
+	substr[i] = '\0';
 	return (substr);
 }
 
@@ -69,31 +76,20 @@ char	*ft_strdup(const char *str)
 {
 	char	*duplicate;
 	size_t	str_len;
+	size_t	i;
 
 	str_len = ft_strlen(str);
+	i = 0;
 	duplicate = malloc((str_len + 1) * sizeof(char));
 	if (!duplicate)
 		return (NULL);
-	ft_strlcpy(duplicate, str, str_len + 1);
-	return (duplicate);
-}
-size_t	ft_strlcpy(char *dest, const char *src, size_t dsize)
-{
-	size_t	i;
-	size_t	ssize;
-
-	i = 0;
-	ssize = ft_strlen(src);
-	if (dsize > 0)
+	while (i < str_len && str[i] != '\0')
 	{
-		while (i < (dsize - 1) && src[i] != '\0')
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
+		duplicate[i] = str[i];
+		i++;
 	}
-	return (ssize);
+	duplicate[str_len] = '\0';
+	return (duplicate);
 }
 
 size_t	ft_strlen(const char *str)
