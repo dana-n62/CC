@@ -6,88 +6,94 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:49:35 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/03 10:00:21 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/14 09:05:35 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 
-static char	*find_line(int fd, ssize_t read_bytes, char **remaining)
+static void	check_remainder(char **remainder, char *buffer)
 {
-	char	*found;
-	char	*line;
-	size_t	i;
-	
-	found = NULL;
-	i = 0;
-	line = malloc(BUFFER_SIZE + 1);
-	if (!line)
-		return (NULL);
-	while (read_bytes > 0 || *remaining)
+	char	*temp;
+
+	temp = NULL;
+	if (*remainder)
 	{
-		if (*remaining)
-			i = ft_strchr(*remaining, '\n');
-		if (i > 0)
-		{
-<<<<<<< HEAD
-			if (*remaining == NULL)
-			{
-				*remaining = malloc(i + 1);
-				if (!*remaining)
-					return (NULL);
-				ft_strlcpy(*remaining, current_read + i, source_size - i);
-			}
-			else
-				ft_strlcat(*remaining, current_read + i, source_size - i);
-			new_line = malloc(i + 1);
-			if (!new_line)
-				return (NULL);
-			ft_strlcpy(new_line, current_read, i + 1);
-			return (new_line);
-=======
-			found = malloc(i + 1);
-			if (!found)
-				return (NULL);
-			ft_memmove(found, *remaining, i + 1);
-			ft_memmove(*remaining, *remaining + i, ft_strlen(*remaining));
-			free(line);
-			return (found);
->>>>>>> 366ce06 (updated the whole work)
-		}
-		else
-			*remaining = ft_strjoin(*remaining, line);
-		read_bytes = read(fd, line, BUFFER_SIZE);
+		temp = ft_strjoin(*remainder, buffer);
+		*remainder = ft_strdup(temp);
+		free(temp);
 	}
-	free(line);
-	free(found);
+	else
+		*remainder = ft_strdup(buffer);
+}
+static char	*find_a_line(int fd, char **remainder, char **buffer, ssize_t *read_bytes)
+{
+	char	*sub_string;
+	char	*line;
+	int	len;
+
+	sub_string = ft_strchr(*remainder, '\n');
+	if (sub_string)
+	{
+		len = sub_string - *remainder;
+		line = ft_substr(*remainder, 0, len + 1);
+		if (!line)
+		{
+			free(*remainder);
+			return (NULL);
+		}
+		*remainder = ft_strdup(sub_string);
+		*read_bytes = read(fd, *buffer, BUFFER_SIZE);
+		if (!*read_bytes)
+
+		return (line);
+	}
+	free(*buffer);
 	return (NULL);
 }
-
-char	*get_next_line(int fd)
+static char	*start_the_search(int fd, char **remainder)
 {
-<<<<<<< HEAD
-	static char	*remainig_data = NULL;
-	char		*read_data;
-	ssize_t		read_bytes;
-
-	read_data = malloc(BUFFER_SIZE + 1);
-	if (!read_data)
-=======
-	static char	*remaining_data;
 	ssize_t	read_bytes;
-	char	*read_line;
-	
-	read_line = malloc(BUFFER_SIZE + 1);
-	if (!read_line)
->>>>>>> 366ce06 (updated the whole work)
+	char	*buffer;
+	char	*line;
+
+	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buffer)
 		return (NULL);
-	read_bytes = read(fd, read_line, BUFFER_SIZE);
-	if (read_bytes > 0 || remaining_data)
-		read_line = find_line(fd, read_bytes, &remaining_data);
-	if (read_bytes <= 0 && remaining_data == NULL)
+	read_bytes = read(fd, buffer, BUFFER_SIZE);
+	if (read_bytes <= 0)
 	{
-		free(read_line);
+		free(buffer);
 		return (NULL);
 	}
-	return (read_line);
+	buffer[read_bytes] = '\0';
+	check_remainder(remainder, buffer); //second check the box
+	if (!*remainder)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	line = find_a_line(fd, remainder, &buffer, &read_bytes); // third try to find a line
+	while (line || read_bytes > 0)
+		find_a_line(fd, remainder, &buffer, &read_bytes);
+	return (line);
+}
+char	*get_next_line(int fd)
+{
+	char	*found_line;
+	static char	*remainder;
+
+	if (BUFFER_SIZE <= 0 || fd < 0)
+		return (NULL);
+	found_line = start_the_search(fd, &remainder); //first read the file
+	if (found_line == NULL)
+	{
+		if (remainder)
+		{
+			found_line = ft_strdup(remainder);
+			free(remainder);
+		}
+		else
+			return (NULL);
+	}
+	return (found_line);
 }
