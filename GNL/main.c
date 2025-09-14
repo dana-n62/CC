@@ -1,22 +1,23 @@
+
 #include "get_next_line.h"
-//this code is a helper function to understand how open/read/write works
 
 int	main(void)
 {
 	int	fd;
-	char	*buffer;
+//	int i = 0;
+	char	*line;
 
-	fd = open("read2.txt", O_RDONLY);
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return(-1);
-	buffer = get_next_line(fd);
-	while (buffer)
+	fd = open("read.txt", O_RDWR);
+	line = get_next_line(fd);
+
+	while (line != NULL)
 	{
-		printf("%s", buffer);
-		buffer = get_next_line(fd);
+		//i++;
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
 	}
-	free(buffer);
+	free(line);
 	close(fd);
 	return (0);
 }
