@@ -15,6 +15,7 @@ int	main(void)
 	{
 		//i++;
 		printf("%s", line);
+		//printf("hi");
 		free(line);
 		line = get_next_line(fd);
 	}

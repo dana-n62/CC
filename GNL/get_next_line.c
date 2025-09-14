@@ -20,6 +20,7 @@ static void	check_remainder(char **remainder, char *buffer)
 	if (*remainder)
 	{
 		temp = ft_strjoin(*remainder, buffer);
+		free(*remainder);
 		*remainder = ft_strdup(temp);
 		free(temp);
 	}
@@ -38,14 +39,12 @@ static char	*find_a_line(int fd, char **remainder, char **buffer, ssize_t read_b
 		{
 			line = ft_substr(*remainder, 0, (sub_string - *remainder));
 			if (!line)
-			{
-				free(*remainder);
 				break ;
-			}
-			//free(*remainder);
+			free(*remainder);
 			*remainder = ft_strdup(sub_string);
 			return (line);
 		}
+
 		read_bytes = read(fd, *buffer, BUFFER_SIZE);
 		if (read_bytes <= 0)
 			break ;
@@ -90,13 +89,16 @@ char	*get_next_line(int fd)
 	found_line = start_the_search(fd, &remainder); //first read the file
 	if (found_line == NULL)
 	{
-		if (remainder)
+		if (ft_strlen(remainder) != 0)
 		{
 			found_line = ft_strdup(remainder);
 			free(remainder);
 		}
 		else
+		{
+			free(remainder);
 			return (NULL);
+		}
 	}
 	return (found_line);
 }
