@@ -6,10 +6,11 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:49:35 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/14 09:05:35 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/14 10:56:36 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 
 static void	check_remainder(char **remainder, char *buffer)
 {
@@ -25,27 +26,31 @@ static void	check_remainder(char **remainder, char *buffer)
 	else
 		*remainder = ft_strdup(buffer);
 }
-static char	*find_a_line(int fd, char **remainder, char **buffer, ssize_t *read_bytes)
+static char	*find_a_line(int fd, char **remainder, char **buffer, ssize_t read_bytes)
 {
 	char	*sub_string;
 	char	*line;
-	int	len;
 
-	sub_string = ft_strchr(*remainder, '\n');
-	if (sub_string)
+	while (read_bytes > 0)
 	{
-		len = sub_string - *remainder;
-		line = ft_substr(*remainder, 0, len + 1);
-		if (!line)
+		sub_string = ft_strchr(*remainder, '\n');
+		if (sub_string != NULL)
 		{
-			free(*remainder);
-			return (NULL);
+			line = ft_substr(*remainder, 0, (sub_string - *remainder));
+			if (!line)
+			{
+				free(*remainder);
+				break ;
+			}
+			//free(*remainder);
+			*remainder = ft_strdup(sub_string);
+			return (line);
 		}
-		*remainder = ft_strdup(sub_string);
-		*read_bytes = read(fd, *buffer, BUFFER_SIZE);
-		if (!*read_bytes)
-
-		return (line);
+		read_bytes = read(fd, *buffer, BUFFER_SIZE);
+		if (read_bytes <= 0)
+			break ;
+		(*buffer)[read_bytes] = '\0';
+		check_remainder(remainder, *buffer);
 	}
 	free(*buffer);
 	return (NULL);
@@ -67,14 +72,12 @@ static char	*start_the_search(int fd, char **remainder)
 	}
 	buffer[read_bytes] = '\0';
 	check_remainder(remainder, buffer); //second check the box
-	if (!*remainder)
+	if (*remainder == NULL)
 	{
 		free(buffer);
 		return (NULL);
 	}
-	line = find_a_line(fd, remainder, &buffer, &read_bytes); // third try to find a line
-	while (line || read_bytes > 0)
-		find_a_line(fd, remainder, &buffer, &read_bytes);
+	line = find_a_line(fd, remainder, &buffer, read_bytes); // third try to find a line
 	return (line);
 }
 char	*get_next_line(int fd)
