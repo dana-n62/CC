@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:46:28 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/02 18:24:58 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/14 09:08:33 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE //to allow redifing it during compilation
-# define BUFFER_SIZE 10	//when i used int and =  it replaced all int with the 100 value causing an error
-# endif
-
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <fcntl.h>
 
-char	*get_next_line(int fd);
-size_t     ft_strchr(const char *str, int c);
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlcat(char *dest, const char *src, size_t size);
-//char	*ft_strdup(const char *str);
-void	*ft_memmove(void *dest, const void *src, size_t n);
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 5
+#endif
 
-# endif
+char	*get_next_line(int fd);
+char	*ft_strchr(const char *str, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+void	*ft_memmove(void *dest, const void *src, size_t n);
+char	*ft_strdup(const char *str);
+size_t	ft_strlcpy(char *dest, const char *src, size_t dsize);
+size_t	ft_strlen(const char *str);
+size_t	ft_strlcat(char *dest, const char *src, size_t size);
+#endif
+
