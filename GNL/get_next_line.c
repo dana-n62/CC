@@ -12,6 +12,22 @@
 
 #include "get_next_line.h"
 
+static char	*ft_strchr(const char *str, int c)
+{
+	size_t	i;
+
+	if ((char)c == 0)
+		return ((char *)str + ft_strlen(str));
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char)c)
+			return ((char *)str + i + 1);
+		i++;
+	}
+	return (NULL);
+}
+
 static void	check_remainder(char **remainder, char **buffer)
 {
 	char	*temp;
@@ -27,7 +43,8 @@ static void	check_remainder(char **remainder, char **buffer)
 	else
 		*remainder = ft_strdup(*buffer);
 }
-static char	*find_a_line(int fd, char **remainder, char **buffer, ssize_t read_bytes)
+
+static char	*search(int fd, char **remainder, char **buffer, ssize_t read_bytes)
 {
 	char	*sub_string;
 	char	*line;
@@ -52,9 +69,9 @@ static char	*find_a_line(int fd, char **remainder, char **buffer, ssize_t read_b
 		(*buffer)[read_bytes] = '\0';
 		check_remainder(remainder, buffer);
 	}
-	free(*buffer);
 	return (NULL);
 }
+
 static char	*start_the_search(int fd, char **remainder, char **buffer)
 {
 	ssize_t	read_bytes;
@@ -64,18 +81,17 @@ static char	*start_the_search(int fd, char **remainder, char **buffer)
 	if (read_bytes <= 0)
 		return (NULL);
 	(*buffer)[read_bytes] = '\0';
-	check_remainder(remainder, buffer); //second check the box
+	check_remainder(remainder, buffer);
 	if (*remainder == NULL)
 		return (NULL);
-	line = find_a_line(fd, remainder, buffer, read_bytes); // third try to find a line
-/* 	if (!line)
-		free(buffer); */
+	line = search(fd, remainder, buffer, read_bytes);
 	return (line);
 }
+
 char	*get_next_line(int fd)
 {
-	char	*found_line;
-	char	*buffer;
+	char		*found_line;
+	char		*buffer;
 	static char	*remainder;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
@@ -83,7 +99,7 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	found_line = start_the_search(fd, &remainder, &buffer); //first read the file
+	found_line = start_the_search(fd, &remainder, &buffer);
 	if (found_line == NULL)
 	{
 		if (ft_strlen(remainder) != 0)
@@ -91,7 +107,10 @@ char	*get_next_line(int fd)
 		free(remainder);
 		remainder = NULL;
 	}
-	free(buffer);
-	buffer = NULL;
+	if (buffer != NULL)
+	{
+		free(buffer);
+		buffer = NULL;
+	}
 	return (found_line);
 }

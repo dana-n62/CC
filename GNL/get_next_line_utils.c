@@ -12,21 +12,6 @@
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *str, int c)
-{
-	size_t	i;
-
-	if ((char)c == 0)
-		return ((char *)str + ft_strlen(str));
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == (char)c)
-			return ((char *)str + i + 1);
-		i++;
-	}
-	return (NULL);
-}
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
@@ -124,4 +109,3 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	dest[i] = '\0';
 	return (total);
 }
-
