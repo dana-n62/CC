@@ -5,17 +5,14 @@
 int	main(void)
 {
 	int	fd;
-//	int i = 0;
 	char	*line;
 
-	fd = open("read.txt", O_RDWR);
+	fd = 0;
 	line = get_next_line(fd);
 
 	while (line != NULL)
 	{
-		//i++;
 		printf("%s", line);
-		//printf("hi");
 		free(line);
 		line = get_next_line(fd);
 	}
