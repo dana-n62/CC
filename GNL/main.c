@@ -2,7 +2,7 @@
 
 #include "get_next_line.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	int	fd;
 	char	*line;
@@ -11,13 +11,14 @@ int	main(void)
 
 	line = get_next_line(fd);
 
+	int i = 0;
 	while (line != NULL)
 	{
-		printf("%s", line);
+		printf("%i: %s", i, line);
 		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
-	free(line);
 	close(fd);
 	return (0);
 }
