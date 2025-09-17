@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:49:40 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/14 13:18:29 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/17 11:38:29 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	s1_length;
 	size_t	s2_length;
 
-	if (!s1 ||!s2)
+	if (!s1 && !s2)
 		return (NULL);
 	s1_length = ft_strlen(s1);
 	s2_length = ft_strlen(s2);
@@ -65,7 +65,7 @@ char	*ft_strdup(const char *str)
 
 	str_len = ft_strlen(str);
 	i = 0;
-	duplicate = malloc((str_len + 1) * sizeof(char));
+	duplicate = malloc(str_len + 1);
 	if (!duplicate)
 		return (NULL);
 	while (i < str_len && str[i] != '\0')
@@ -73,7 +73,7 @@ char	*ft_strdup(const char *str)
 		duplicate[i] = str[i];
 		i++;
 	}
-	duplicate[str_len] = '\0';
+	duplicate[i] = '\0';
 	return (duplicate);
 }
 
@@ -82,7 +82,7 @@ size_t	ft_strlen(const char *str)
 	size_t	size;
 
 	size = 0;
-	if (str == NULL)
+	if (str == NULL || str[0] == '\0')
 		return (size);
 	while (str[size] != '\0')
 		size++;
@@ -95,7 +95,10 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	size_t	total;
 	size_t	j;
 
-	i = ft_strlen(dest);
+	if (dest == NULL)
+		i = 0;
+	else
+		i = ft_strlen(dest);
 	if (i >= size)
 		return (size + ft_strlen(src));
 	total = i + ft_strlen(src);
