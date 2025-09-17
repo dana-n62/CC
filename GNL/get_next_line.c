@@ -6,40 +6,47 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:49:35 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/17 12:18:08 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/17 13:25:15 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+static void free_remainder(char **remainder)
+{
+	free(*remainder);
+	*remainder = NULL;
+}
+
 static char	*ft_strchr(const char *str, int c)
 {
 	size_t	i;
 
-	if ((char)c == 0)
+	if (!str)
+		return (NULL);
+	if ((char)c == '\0')
 		return ((char *)str + ft_strlen(str));
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
 		if (str[i] == (char)c)
-			return ((char *)str + i + 1);
+			return ((char *)str + i);
 		i++;
 	}
 	return (NULL);
 }
 
-static void	check_remainder(char **remainder, char **buffer)
+static void	update_remainder(char **remainder, char *buffer)
 {
 	char	*temp;
 
-	temp = NULL;
-	if (!*buffer || !buffer)
+	if (!buffer)
 		return ;
-	if (*remainder == NULL)
-		*remainder = ft_strdup(*buffer);
+	if (!*remainder)
+		*remainder = ft_strdup(buffer);
 	else
 	{
-		temp = ft_strjoin(*remainder, *buffer);
+		temp = ft_strjoin(*remainder, buffer);
 		if (!temp)
 			return ;
 		free(*remainder);
@@ -47,73 +54,60 @@ static void	check_remainder(char **remainder, char **buffer)
 	}
 }
 
-static char	*find_a_line(int fd, char **rem, char **buff, ssize_t *read_bytes)
+static char	*extract_line(char **remainder)
 {
-	char	*sub_string;
+	char	*newline_pos;
 	char	*line;
 	char	*temp;
+	size_t	len;
 
-	sub_string = NULL;
-	while (*read_bytes >= 0)
+	if (!*remainder)
+		return (NULL);
+	newline_pos = ft_strchr(*remainder, '\n');
+	if (newline_pos)
 	{
-		sub_string = ft_strchr(*rem, '\n');
-		if (sub_string != NULL)
-		{
-			line = ft_substr(*rem, 0, (sub_string - *rem));
-			if (!line)
-				break ;
-			temp = *rem;
-			*rem = ft_strdup(sub_string);
-			free(temp);
-			return (line);
-		}
-		*read_bytes = read(fd, *buff, BUFFER_SIZE);
-		if (*read_bytes <= 0)
-			break ;
-		(*buff)[*read_bytes] = '\0';
-		check_remainder(rem, buff);
+		len = newline_pos - *remainder + 1;
+		line = ft_substr(*remainder, 0, len);
+		temp = ft_strdup(*remainder + len);
+		free(*remainder);
+		*remainder = temp;
+		return (line);
 	}
+	if (**remainder != '\0')
+	{
+		line = ft_strdup(*remainder);
+		free_remainder(remainder);
+		return (line);
+	}
+	free_remainder(remainder);
 	return (NULL);
-}
-
-static int	start_search(char **line, int fd, char **remainder, char **buffer)
-{
-	ssize_t	read_bytes;
-
-	read_bytes = read(fd, *buffer, BUFFER_SIZE);
-	if (read_bytes < 0)
-		return (read_bytes);
-	(*buffer)[read_bytes] = '\0';
-	check_remainder(remainder, buffer);
-	*line = find_a_line(fd, remainder, buffer, &read_bytes);
-	return (read_bytes);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*found_line;
-	char		*buffer;
 	static char	*remainder;
-	int			flag;
+	char		*buffer;
+	ssize_t		bytes_read;
+	char		*line;
 
-	found_line = NULL;
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	flag = start_search(&found_line, fd, &remainder, &buffer);
-	if (found_line == NULL)
+	bytes_read = 1;
+	while (!ft_strchr(remainder, '\n') && bytes_read > 0)
 	{
-		if (flag >= 0 || ft_strlen(remainder) > 0)
-			flag = start_search(&found_line, fd, &remainder, &buffer);
-		if (flag <= 0)
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
 		{
-			free(remainder);
-			remainder = NULL;
+			free(buffer);
+			return (NULL);
 		}
+		buffer[bytes_read] = '\0';
+		update_remainder(&remainder, buffer);
 	}
 	free(buffer);
-	buffer = NULL;
-	return (found_line);
+	line = extract_line(&remainder);
+	return (line);
 }
