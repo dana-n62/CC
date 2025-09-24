@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/21 12:02:18 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/24 10:13:38 by DaNa             ###   ########.fr       */
+/*   Created: 2025/08/13 12:17:51 by DaNa              #+#    #+#             */
+/*   Updated: 2025/08/14 15:05:09 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FT_PRINTF_H
-# define	FT_PRINTF_H
-
-# include "./libft/libft.h"
-# include <stddef.h>
-# include <stdarg.h>
-# include <unistd.h>
-#endif
+#include "libft.h"
+//always check for empty lists to avoid segfaults
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}

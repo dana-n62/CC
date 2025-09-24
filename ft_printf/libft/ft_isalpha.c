@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/21 12:02:18 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/24 10:13:38 by DaNa             ###   ########.fr       */
+/*   Created: 2025/08/06 10:45:48 by DaNa              #+#    #+#             */
+/*   Updated: 2025/08/06 10:45:49 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FT_PRINTF_H
-# define	FT_PRINTF_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <stddef.h>
-# include <stdarg.h>
-# include <unistd.h>
-#endif
+int	ft_isalpha(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (c);
+	else
+		return (0);
+}

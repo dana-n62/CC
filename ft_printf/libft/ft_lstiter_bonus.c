@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/21 12:02:18 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/24 10:13:38 by DaNa             ###   ########.fr       */
+/*   Created: 2025/08/13 13:30:40 by DaNa              #+#    #+#             */
+/*   Updated: 2025/08/13 13:57:05 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FT_PRINTF_H
-# define	FT_PRINTF_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <stddef.h>
-# include <stdarg.h>
-# include <unistd.h>
-#endif
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	while (lst != NULL)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}

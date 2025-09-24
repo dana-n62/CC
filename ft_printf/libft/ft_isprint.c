@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/21 12:02:18 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/24 10:13:38 by DaNa             ###   ########.fr       */
+/*   Created: 2025/08/06 10:45:58 by DaNa              #+#    #+#             */
+/*   Updated: 2025/08/10 13:07:29 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FT_PRINTF_H
-# define	FT_PRINTF_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <stddef.h>
-# include <stdarg.h>
-# include <unistd.h>
-#endif
+int	ft_isprint(int c)
+{
+	if (c >= 32 && c <= 126)
+		return (16384);
+	return (0);
+}
