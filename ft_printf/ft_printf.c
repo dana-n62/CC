@@ -6,28 +6,32 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 12:02:42 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/24 10:32:11 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/25 16:03:53 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	handle_option(char **letter)
-{}
-static void	check_conversion(char letter, int *size, va_list args)
+/* static void	handle_option(char *letter)
+{
+	if (letter == '#')
+} */
+static void	check_conversion(char letter, int *size, va_list *args)
 {
 	if (letter == 'c')
-		print_char(va_arg(args, char), size);
+		print_char(va_arg(*args, unsigned int), size);
 	if (letter == 's')
+		print_str(va_arg(*args, char *), size);
 	if (letter == 'd')
-	if (letter == 'i')
+		print_decimal(va_arg(*args, double), size);
+/*	if (letter == 'i')
 	if (letter == 'u')
 	if (letter == 'x')
 	if (letter == 'X')
-	if (letter == 'p')
+	if (letter == 'p') */
 	if (letter == '%')
 	{
-		write(1, '%', 1);
+		write(1, "%", 1);
 		size++;
 	}
 }
@@ -41,22 +45,24 @@ int ft_printf(const char *string, ...)
 	va_start(args, string);
 	size = 0;
 	i = 0;
-	while (string != NULL)
+	while (string[i] != '\0')
 	{
 		if (string[i] == '%')
 		{
 			i++;
-			while (!ft_isalpha(i))
+			/* while (!ft_isalpha(i))
 			{
-				handle_options(&string + i);
+				handle_options(string + i);
 				i++;
-			}
+			} */
 			check_conversion(string[i], &size, &args);
 		}
 		else
-			write(1, string[i], 1);
+		{
+			write(1, &string[i], 1);
+			size++;
+		}
 		i++;
-		size++;
 	}
 	return (size);
 }

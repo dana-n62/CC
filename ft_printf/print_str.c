@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_char.c                                       :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 10:30:00 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/25 11:39:12 by DaNa             ###   ########.fr       */
+/*   Created: 2025/09/25 11:06:27 by DaNa              #+#    #+#             */
+/*   Updated: 2025/09/25 11:30:44 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_char(unsigned int c, int *size)
+void	print_str(char *str, int *size)
 {
-	write(1, &c, 1);
-	*size += 1;
+	while (*str != '\0')
+	{
+		write(1, &*str, 1);
+		*size += 1;
+		str++;
+	}
 }
