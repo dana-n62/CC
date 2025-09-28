@@ -5,18 +5,18 @@
 int	main(void)
 {
 //	char	*grade = "String";
-//	int	size_printf;
+	int	size_printf;
 	int	size_ftprintf;
 /* 	char	name[] = "josh";
 	char	sport[] = "football";
 	int		age = 18; */
-	float	fees = 19.8;
+	unsigned int	fees = -458795277;
 
-	//size_printf = printf("printf: %d\n", fees);
-	size_ftprintf = ft_printf("printf: %d\n", fees);
+	size_printf = printf("printf: %u\n", fees);
+	size_ftprintf = ft_printf("printf: %u\n", fees);
 
 	printf("------------------------------\n");
-//	printf("size of printf: %d\n", size_printf);
+	printf("size of printf: %d\n", size_printf);
 	printf("size of ft_printf: %d\n", size_ftprintf);
 	/* printf("%#x\n", 17);
 	printf("%#X\n", 17);

@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 12:02:42 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/25 16:03:53 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/28 10:23:21 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void	check_conversion(char letter, int *size, va_list *args)
 		print_char(va_arg(*args, unsigned int), size);
 	if (letter == 's')
 		print_str(va_arg(*args, char *), size);
-	if (letter == 'd')
-		print_decimal(va_arg(*args, double), size);
-/*	if (letter == 'i')
+	if (letter == 'd' || letter == 'i')
+		print_number(va_arg(*args, int), size);
 	if (letter == 'u')
-	if (letter == 'x')
+		print_unsigned(va_arg(*args, unsigned int), size);
+/*	if (letter == 'x')
 	if (letter == 'X')
 	if (letter == 'p') */
 	if (letter == '%')
