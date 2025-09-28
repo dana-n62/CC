@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static void free_remainder(char **remainder)
+static void	free_remainder(char **remainder)
 {
 	free(*remainder);
 	*remainder = NULL;
