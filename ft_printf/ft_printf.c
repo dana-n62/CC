@@ -26,9 +26,10 @@ static void	check_conversion(char letter, int *size, va_list *args)
 		print_number(va_arg(*args, int), size);
 	if (letter == 'u')
 		print_unsigned(va_arg(*args, unsigned int), size);
-/*	if (letter == 'x')
-	if (letter == 'X')
-	if (letter == 'p') */
+	if (letter == 'x' || letter == 'X')
+		print_hexa(va_arg(*args, unsigned long), letter, size);
+	if (letter == 'p')
+		print_pointer(va_arg(*args, unsigned long), size);
 	if (letter == '%')
 	{
 		write(1, "%", 1);

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   print_pointer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
+/*   By: DaNa <dna2@student.42amman.com>            #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/25 11:06:27 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/25 11:30:44 by DaNa             ###   ########.fr       */
+/*   Created: 2025-09-28 10:10:30 by DaNa              #+#    #+#             */
+/*   Updated: 2025-09-28 10:10:30 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_str(char *str, int *size)
+void    print_pointer(unsigned long value, int *size)
 {
-	if (!str)
-	{
-		write(1, "(null)", 6);
-		*size += 6;
-		return ;
-	}
-	while (*str != '\0')
-	{
-		write(1, &*str, 1);
-		*size += 1;
-		str++;
-	}
+    if (!value)
+    {
+        write(1, "(nil)", 5);
+        *size += 5;
+        return ;
+    }
+    write(1, "0x", 2);
+    *size += 2;
+    print_hexa(value, 'x', size);
 }

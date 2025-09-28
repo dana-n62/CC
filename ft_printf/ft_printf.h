@@ -24,5 +24,7 @@ void	print_char(unsigned int c, int *size);
 void	print_str(char *str, int *size);
 void	print_number(int number, int *size);
 void	print_unsigned(int val_unsigned, int *size);
+void    print_hexa(unsigned long number, char id, int *size);
+void    print_pointer(unsigned long value, int *size);
 int ft_printf(const char *string, ...);
 #endif
