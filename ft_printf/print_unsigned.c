@@ -6,7 +6,7 @@
 /*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/28 10:15:54 by DaNa              #+#    #+#             */
-/*   Updated: 2025/09/28 10:28:38 by DaNa             ###   ########.fr       */
+/*   Updated: 2025/09/29 10:31:26 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	print_unsigned(int val_unsigned, int *size)
 	value = (long long)val_unsigned;
 	*size += 1;
 	if (value == 0)
+	{
 		write(1, "0", 1);
+		return ;
+	}
 	if (value < 0)
 		value = UINT_MAX + (value + 1);
 	if (value / 10 != 0)
