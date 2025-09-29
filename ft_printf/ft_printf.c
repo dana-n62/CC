@@ -12,10 +12,6 @@
 
 #include "ft_printf.h"
 
-/* static void	handle_option(char *letter)
-{
-	if (letter == '#')
-} */
 static void	check_conversion(char letter, int *size, va_list *args)
 {
 	if (letter == 'c')
@@ -27,35 +23,27 @@ static void	check_conversion(char letter, int *size, va_list *args)
 	if (letter == 'u')
 		print_unsigned(va_arg(*args, unsigned int), size);
 	if (letter == 'x' || letter == 'X')
-		print_hexa(va_arg(*args, unsigned long), letter, size);
+		print_hexa(va_arg(*args, unsigned int), letter, size);
 	if (letter == 'p')
 		print_pointer(va_arg(*args, unsigned long), size);
 	if (letter == '%')
-	{
-		write(1, "%", 1);
-		size++;
-	}
+		print_char('%', size);
 }
 
-int ft_printf(const char *string, ...)
+int	ft_printf(const char *string, ...)
 {
 	va_list	args;
-	int	size;
-	int	i;
+	int		size;
+	int		i;
 
 	va_start(args, string);
 	size = 0;
 	i = 0;
 	while (string[i] != '\0')
 	{
-		if (string[i] == '%')
+		if (string[i] == '%' )
 		{
 			i++;
-			/* while (!ft_isalpha(i))
-			{
-				handle_options(string + i);
-				i++;
-			} */
 			check_conversion(string[i], &size, &args);
 		}
 		else
