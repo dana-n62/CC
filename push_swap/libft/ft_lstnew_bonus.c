@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Dana Nour <dna2@student.42amman.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 13:43:05 by Dana Nour         #+#    #+#             */
-/*   Updated: 2025/11/03 13:47:41 by Dana Nour        ###   ########.fr       */
+/*   Created: 2025/08/13 10:14:46 by DaNa              #+#    #+#             */
+/*   Updated: 2025/11/17 20:36:26 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	rotate(int *stack, int top)
+#include "libft.h"
+/* Allocates memory (using malloc(3)) and returns
+a new node. The ’content’ member variable is
+initialized with the given parameter ’content’.
+The variable ’next’ is initialized to NULL. */
+t_list	*ft_lstnew(void *content)
 {
-	int	i;
-	int	temp;
+	t_list	*new;
 
-	if (is_empty(top))
-		exit(1);
-	i = 0;
-	temp = stack[0];
-	while (i < top)
-	{
-		stack[i] = stack[i + 1];
-		i++;
-	}
-	stack[i] = temp;
-}
-void	rotate_both(int *stack_a, int *stack_b, int top_a, int top_b)
-{
-	rotate(stack_a, top_a);
-	rotate(stack_b, top_b);
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

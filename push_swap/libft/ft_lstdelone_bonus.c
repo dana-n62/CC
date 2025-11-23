@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Dana Nour <dna2@student.42amman.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 13:43:18 by Dana Nour         #+#    #+#             */
-/*   Updated: 2025/11/17 20:23:08 by Dana Nour        ###   ########.fr       */
+/*   Created: 2025/08/13 12:25:33 by DaNa              #+#    #+#             */
+/*   Updated: 2025/11/17 20:37:31 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-# include "libft/libft.h"
-# include <stdlib.h>
-
-typedef struct s_list
+#include "libft.h"
+/* Takes a node as parameter and frees its content
+using the function ’del’. Free the node itself but
+does NOT free the next node. */
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
-
-void	push_swap(char *argv);
-void	input_checker(char *argv, t_list **pointer_stack_a);
-
-#endif
+	del(lst->content);
+	free(lst);
+}

@@ -1,13 +1,14 @@
 CC= cc
 CFLAGS= -Werror -Wall -Wextra
 NAME= push_swap
-SRCS= push_swap.c ft_swap.c ft_push.c ft_rotate.c stack_status.c ft_reverse_rotate.c
+SRCS= push_swap.c
 OBJS= $(SRCS:.c=.o)
 
 all:$(NAME)
 
 $(NAME):$(OBJS)
-	$(CC)$(FLAGS)$(SRCS)-o$(OBJS)
+	$(MAKE) -C ./libft
+	$(CC) $(FLAGS) $(OBJS) -L./libft -lft $(NAME)
 clean:
 	-rm -f $(OBJS)
 fclean:

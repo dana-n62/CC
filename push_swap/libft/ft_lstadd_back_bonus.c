@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Dana Nour <dna2@student.42amman.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 13:43:18 by Dana Nour         #+#    #+#             */
-/*   Updated: 2025/11/17 20:23:08 by Dana Nour        ###   ########.fr       */
+/*   Created: 2025/08/13 12:21:13 by DaNa              #+#    #+#             */
+/*   Updated: 2025/11/17 20:36:56 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-# include "libft/libft.h"
-# include <stdlib.h>
-
-typedef struct s_list
+#include "libft.h"
+//deferencing the original lst to avoid segfault
+//Adds the node ’new’ at the end of the list.
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	t_list	*temp;
 
-void	push_swap(char *argv);
-void	input_checker(char *argv, t_list **pointer_stack_a);
-
-#endif
+	if (!new)
+		return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		temp = *lst;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = new;
+	}
+}

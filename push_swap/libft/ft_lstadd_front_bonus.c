@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Dana Nour <dna2@student.42amman.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 13:43:18 by Dana Nour         #+#    #+#             */
-/*   Updated: 2025/11/17 20:23:08 by Dana Nour        ###   ########.fr       */
+/*   Created: 2025/08/13 10:45:22 by DaNa              #+#    #+#             */
+/*   Updated: 2025/11/17 20:35:55 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-# include "libft/libft.h"
-# include <stdlib.h>
-
-typedef struct s_list
+#include "libft.h"
+//Adds the node ’new’ at the beginning of the list.
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
-
-void	push_swap(char *argv);
-void	input_checker(char *argv, t_list **pointer_stack_a);
-
-#endif
+	new->next = *lst;
+	*lst = new;
+}

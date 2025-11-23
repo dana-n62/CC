@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Dana Nour <dna2@student.42amman.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 13:43:18 by Dana Nour         #+#    #+#             */
-/*   Updated: 2025/11/17 20:23:08 by Dana Nour        ###   ########.fr       */
+/*   Created: 2025/08/13 12:17:51 by DaNa              #+#    #+#             */
+/*   Updated: 2025/11/17 20:35:36 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-# include "libft/libft.h"
-# include <stdlib.h>
-
-typedef struct s_list
+#include "libft.h"
+//always check for empty lists to avoid segfaults
+//Returns the last node of the list.
+t_list	*ft_lstlast(t_list *lst)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
-
-void	push_swap(char *argv);
-void	input_checker(char *argv, t_list **pointer_stack_a);
-
-#endif
+	if (!lst)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}

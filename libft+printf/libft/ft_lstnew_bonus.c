@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dana Nour <dna2@student.42amman.com>       +#+  +:+       +#+        */
+/*   By: DaNa <dna2@student.42amman.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 13:43:35 by Dana Nour         #+#    #+#             */
-/*   Updated: 2025/11/03 13:43:36 by Dana Nour        ###   ########.fr       */
+/*   Created: 2025/08/13 10:14:46 by DaNa              #+#    #+#             */
+/*   Updated: 2025/08/15 08:00:30 by DaNa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-void	swap(int *stack, int size)
+t_list	*ft_lstnew(void *content)
 {
-	int	temp;
+	t_list	*new;
 
-	if (size <= 1)
-		return ;
-	temp = stack[0];
-	stack[0] = stack[1];
-	stack[1] = temp;
-}
-void	swap_ss(int *stack_a, int *stack_b, int size_a, int size_b)
-{
-	swap(stack_a, size_a);
-	swap(stack_b, size_b);
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }
