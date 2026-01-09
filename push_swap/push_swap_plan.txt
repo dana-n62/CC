@@ -1,0 +1,225 @@
+$ ./push_swap 3 2 1 5 4
+pb
+pb
+sa
+pa
+pa
+ra
+ra
+
+$ ./push_swap 0 9 1 8 2 7 3 6 4 5
+# ... outputs ~15 operations ...
+
+$ ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
+6  # (Your program outputs 6 operations)
+```
+
+---
+
+## 💡 **KEY CONCEPTS YOU'LL MASTER**
+
+### 1. **Data Structures:**
+- Linked Lists (nodes, pointers, traversal)
+- Stack ADT (LIFO - Last In First Out)
+- Why stacks for this problem?
+
+### 2. **Algorithms:**
+- Simple sorts (2-3 elements) - hardcoded optimal
+- Medium sorts (4-100 elements) - Turk/Chunk method
+- Large sorts (100-500 elements) - Advanced strategies
+- Time & Space Complexity
+
+### 3. **Operations:**
+11 operations total:
+- **Swap:** `sa`, `sb`, `ss`
+- **Push:** `pa`, `pb`
+- **Rotate:** `ra`, `rb`, `rr`
+- **Reverse Rotate:** `rra`, `rrb`, `rrr`
+
+### 4. **Programming Skills:**
+- Memory management (malloc, free, no leaks!)
+- Error handling (invalid input, duplicates, overflow)
+- Modular code design
+- Makefile creation
+
+---
+
+## 🧠 **BEFORE WE START: CRITICAL THINKING**
+
+### **Question 1:** Why Two Stacks?
+Think about it: If you had only one stack, could you sort it? What operations would you need?
+
+### **Question 2:** What Makes This Hard?
+You can only touch the **top** of each stack. You can't access middle elements directly!
+
+### **Question 3:** What's the Strategy?
+You need to move numbers between stacks intelligently. But how do you decide which number to move and when?
+
+---
+
+## 📚 **THE THREE PILLARS OF THIS PROJECT**
+
+### **Pillar 1: OPERATIONS (Mechanics)**
+Understanding what each operation does physically to the stacks.
+```
+Stack A: [3][2][1]
+
+After 'sa' (swap):
+Stack A: [2][3][1]  ← Top two swapped
+
+After 'ra' (rotate):
+Stack A: [3][1][2]  ← Top moved to bottom
+
+After 'rra' (reverse rotate):
+Stack A: [2][3][1]  ← Bottom moved to top
+```
+
+### **Pillar 2: ALGORITHM (Strategy)**
+Deciding **which** operations to perform and **when**.
+```
+The challenge: Different input sizes need different strategies!
+
+3 numbers   → Hardcoded (max 2-3 moves)
+5 numbers   → Simple strategy
+100 numbers → Need smart algorithm (< 700 moves)
+500 numbers → Need optimized algorithm (< 5500 moves)
+```
+
+### **Pillar 3: IMPLEMENTATION (Code)**
+Writing clean, efficient, leak-free C code.
+
+---
+
+## 🎪 **LEARNING PHILOSOPHY**
+
+### **We'll Follow This Pattern For Each Phase:**
+
+1. **📖 CONCEPT:** I explain the theory
+2. **❓ QUESTIONS:** You answer to verify understanding
+3. **✍️ TASK:** You implement the code
+4. **✅ CHECKPOINT:** You confirm completion before moving on
+
+### **No Rushing!**
+This project typically takes 20-40 hours. We'll build it **right**, not **fast**.
+
+---
+
+## 🗺️ **THE DETAILED PHASE BREAKDOWN**
+
+### **Phase 1: Stack & Operations Theory** (15 mins)
+- What is a stack?
+- Visual understanding of all 11 operations
+- Why these specific operations?
+
+### **Phase 2: Data Structure Design** (20 mins)
+- Designing your node structure
+- Stack representation in memory
+- Helper functions planning
+
+### **Phase 3: Basic Operations** (2-3 hours)
+- Implementing swap operations
+- Implementing push operations
+- Implementing rotate operations
+- Testing each operation
+
+### **Phase 4: Parsing & Validation** (2 hours)
+- Reading command line arguments
+- Converting strings to integers
+- Error detection (non-integers, duplicates, overflow)
+- Building the initial stack
+
+### **Phase 5: Small Sorts** (1 hour)
+- Sorting 2 numbers (trivial)
+- Sorting 3 numbers (optimal hardcoded)
+- Understanding why hardcoding is best here
+
+### **Phase 6: Algorithm Theory** (1 hour)
+- Overview of sorting algorithms
+- Turk algorithm explained deeply
+- Cost calculation concept
+- Why this algorithm works
+
+### **Phase 7: Algorithm Implementation** (4-6 hours)
+- Position assignment
+- Target finding
+- Cost calculation
+- Move execution
+- Main sorting loop
+
+### **Phase 8: Optimization** (2-3 hours)
+- Testing with 100 numbers
+- Testing with 500 numbers
+- Improving operation count
+- Benchmark validation
+
+### **Phase 9: Error Handling** (1 hour)
+- Comprehensive error checking
+- Memory leak prevention
+- Edge case handling
+
+### **Phase 10: Integration** (1 hour)
+- Makefile creation
+- Final testing
+- Documentation
+
+---
+
+## 🎯 **SUCCESS METRICS**
+
+### **Minimum Requirements (80%):**
+- Compiles without errors
+- No crashes, no leaks
+- Sorts correctly
+- 100 numbers in < 1100 operations
+- 500 numbers in < 8500 operations
+
+### **Full Score (100%):**
+- All above +
+- 100 numbers in < 700 operations
+- 500 numbers in < 5500 operations
+
+### **Excellence (Personal Goal):**
+- Clean, readable code
+- Optimal operations
+- Deep understanding of algorithm
+- Can explain every design decision
+
+---
+
+## 🤔 **PRE-START QUESTIONS**
+
+Before we begin Phase 1, please think about and answer:
+
+### **Q1: Stack Basics**
+In your own words, what is a stack? Can you give a real-world example?
+
+### **Q2: Linked Lists**
+Have you worked with linked lists before? Do you understand pointers?
+
+### **Q3: Time Management**
+How much time can you dedicate to this project? (This helps me pace the guidance)
+
+### **Q4: Your Goal**
+Are you aiming for minimum pass (80%) or excellence (100%+)?
+
+### **Q5: Algorithm Preference**
+Do you prefer:
+- Deep understanding → slower but thorough
+- Quick implementation → faster but may need review later
+
+---
+
+## ✅ **READY TO START?**
+
+Once you've:
+1. Read this entire overview
+2. Understood the 10-phase structure
+3. Answered the 5 pre-start questions
+4. Created your project directory structure:
+```
+   push_swap/
+   ├── Makefile
+   ├── include/
+   │   └── push_swap.h
+   └── src/
+       └── (your .c files will go here)
