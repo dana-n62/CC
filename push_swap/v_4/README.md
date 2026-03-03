@@ -57,11 +57,16 @@ To run the program, you simply will need to:<br>
 
 ## Resources
 
-->As this project had been a real door to more complex programming, I have used many tools in order to understand, organise and finally debug my code to achieve the desired goal:<br>
+->As this project had been a real door to more complex programming, I have used many tools in order to understand, organize and finally debug my code to achieve the desired goal:<br>
 
 **YouTube videos:** <br>
--><br>
-**Articles & GitHub repos:** <br>
--><br>
+-> https://youtu.be/OaG81sDEpVk?si=j2aj1crmmEkPfCT8<br>
+-> https://youtu.be/4dMsuxfqufg?si=hLvz9vCPhXSgaCBr<br><br>
+**Other resources:** <br>
+-> Before starting, i used Notion to organize my thoughts and build a structure for the work to be done, and explanation in my own words for some concepts, you can find it here: <br>
+-> https://www.notion.so/5-Push_Swap-291b038429a8803599e7cc9c8bdcb2bf <br><br>
 **AI:** <br>
--><br>
+-> I used the following prompt to help me understand and save time on navigating the project, which lead to a deeper understanding and faster work pace as if you had a friend leaving everything and walk you through the project! Having that said, the output was faulty and i had to debug the project multiple times until i found the error and had it fixed:<br><br>
+"act like a guiding teacher, walk me through steps to build the given project, and explanation of key concepts, also questions to test knowledge acquired along.  the outcome should be a fully functioning code ready to be submitted, and a good understanding of nodes, stacks and the chosen algorithm" --> this lead ot to give me code, so i added the following: <br><br>
+"no code needed now, i want to build the code by myself, i need you to walk me through it one step at a time, starting with explaining the complete journey, then start the  guide one by one where you should wait for my confirmation to move to the next step, after we're done ask me to upload the code so you can evaluate it like a 42school molunitte" <br><br>
+It will be helpful as well to add the wanted file structure but not necessary. <br>

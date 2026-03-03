@@ -1,0 +1,8 @@
+CC = cc
+CFLAGS = -Werror -Wall -Wextra -Wno-incompatible-pointer-types -g
+LIB = -L./minilibx_Linux -lX11 -lXext -lmlx -lm
+NAME = 
+SRCS = main.c
+OBJS = (SRCS:.c=.o)
+
+all:
