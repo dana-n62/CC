@@ -44,7 +44,7 @@ void	send_signal(char c, int pid)
 				error_handler();
 		}
 		while (g_signal == 0)
-			pause();
+			usleep(100);
 		g_signal = 0;
 	}
 }
