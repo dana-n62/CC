@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   sorting_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dana Nour <dna2@student.42amman.com>       +#+  +:+       +#+        */
+/*   By: Dana Nour <dna2@students.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:57:54 by Dana Nour         #+#    #+#             */
-/*   Updated: 2026/01/08 18:22:51 by Dana Nour        ###   ########.fr       */
+/*   Updated: 2026/03/11 10:30:01 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 //main sorting engine: 1- sort stack, 2- sort_two, 3- sort_three
-void	sort_two(t_stack **stack_a)
+void	sort_two(t_stack **stack)
 {
-	if ((*stack_a)->value < (*stack_a)->next->value)
-		sa(stack_a);
+	if ((*stack)->value < (*stack)->next->value)
+	{
+		sb(stack);
+	}
 }
 
 void	sort_three(t_stack **stack_a)

@@ -6,29 +6,26 @@
 /*   By: Dana Nour <dna2@students.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 12:42:16 by Dana Nour         #+#    #+#             */
-/*   Updated: 2026/03/07 09:40:28 by Dana Nour        ###   ########.fr       */
+/*   Updated: 2026/03/12 10:44:05 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
-#include <stdlib.h>
+#include "minitalk.h"
 
-void	error_handler()
+int	g_ack = 0;
+
+void	error_handler(void)
 {
 	write(2, "Error\nWrong PID\n", 16);
 	exit(1);
 }
-int	str_len(char *str)
-{
-	int	size;
 
-	size = 0;
-	while (str[size] != '\0')
-		size++;
-	return (size);
+void	ack_handler(int sig)
+{
+	(void)sig;
+	g_ack = 1;
 }
+
 void	send_signal(char c, int pid)
 {
 	int	j;
@@ -37,29 +34,38 @@ void	send_signal(char c, int pid)
 	while (--j >= 0)
 	{
 		if ((c >> j & 1) == 1)
-			{
-				if(kill(pid, SIGUSR1) < 0)
+		{
+			if (kill(pid, SIGUSR1) < 0)
 				error_handler();
-			}
+		}
 		else
+		{
 			if (kill(pid, SIGUSR2) < 0)
 				error_handler();
-		usleep(200);
+		}
+		while (g_ack == 0)
+			pause();
+		g_ack = 0;
 	}
 }
 
 int	main(int argc, char **argv)
 {
 	int	i;
-	int	j;
 	int	pid;
 	int	size;
+	struct sigaction	sa;
 
-	if (argc == 3 && argv[2][0] != '\0')
+	if (argc == 3)
 	{
-		if ((pid = atoi(argv[1])) <= 0)
+		ft_bzero(&sa, sizeof(sa));
+		sigemptyset(&sa.sa_mask);
+		sa.sa_handler = &ack_handler;
+		sa.sa_flags = 0;
+		sigaction(SIGUSR1, &sa, NULL);
+		if ((pid = ft_atoi(argv[1])) <= 0)
 			error_handler();
-		size = str_len(argv[2]);
+		size = ft_strlen(argv[2]);
 		i = -1;
 		while (++i <= size)
 		{
@@ -67,6 +73,6 @@ int	main(int argc, char **argv)
 		}
 	}
 	else
-		printf("Error, please enter a valid PID followed by one string\n");
+		write(2, "Error, please enter a valid PID followed by one string\n", 56);
 	return (0);
 }
