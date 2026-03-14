@@ -6,7 +6,7 @@
 /*   By: Dana Nour <dna2@students.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 16:44:30 by Dana Nour         #+#    #+#             */
-/*   Updated: 2026/03/14 14:17:58 by Dana Nour        ###   ########.fr       */
+/*   Updated: 2026/03/14 15:11:55 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	count_lines(char *file_name, t_map **s_map)
 			break ;
 	}
 	free(line);
-	free(get_next_line(fd)); //check this
+	get_next_line(-1);
 	close(fd);
 	return (1);
 }

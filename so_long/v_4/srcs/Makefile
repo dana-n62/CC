@@ -23,15 +23,15 @@ $(NAME): $(OBJS) $(MLX) $(LIBFT)
 	$(CC) $(CFLAGS) -I$(GNL_DIR) -c $< -o $@
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX):
-	make -C $(MLX_DIR)
+	$(MAKE) -C $(MLX_DIR)
 
 clean:
 	rm -f $(OBJS)
-	make -C $(LIBFT_DIR) clean
-	make -C $(MLX_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)

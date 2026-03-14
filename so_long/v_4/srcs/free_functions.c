@@ -6,7 +6,7 @@
 /*   By: Dana Nour <dna2@students.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 06:55:57 by Dana Nour         #+#    #+#             */
-/*   Updated: 2026/03/14 14:30:42 by Dana Nour        ###   ########.fr       */
+/*   Updated: 2026/03/14 15:10:35 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	exit_map(t_map *map)
 {
 	if (map)
 		free_map(map);
+	get_next_line(-1); //check this
 	exit(1);
 }
 
