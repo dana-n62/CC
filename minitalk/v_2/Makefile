@@ -9,7 +9,7 @@ SRCS_C = client.c
 OBJS_S = server.o
 OBJS_C = client.o
 
-all: $(NAME)
+all: libft $(NAME)
 
 $(NAME): $(SERVER) $(CLIENT)
 $(SERVER): $(OBJS_S)

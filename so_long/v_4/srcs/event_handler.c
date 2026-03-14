@@ -6,13 +6,13 @@
 /*   By: Dana Nour <dna2@students.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 14:04:31 by Dana Nour         #+#    #+#             */
-/*   Updated: 2026/03/08 11:05:45 by Dana Nour        ###   ########.fr       */
+/*   Updated: 2026/03/14 12:35:23 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	free_map(t_map *game)
+/* void	free_map(t_map *game)
 {
 	int	i;
 
@@ -29,12 +29,13 @@ void	free_map(t_map *game)
 		free(game->map);
 	}
 	free(game);
-}
+} */
 
 int	close_window(void *param)
 {
 	t_game	*s_game;
 
+	free(get_next_line(-1));
 	s_game = (t_game *)param;
 	free_map(s_game->current);
 	mlx_destroy_image(s_game->mlx, s_game->game.w);

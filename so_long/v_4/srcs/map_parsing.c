@@ -6,7 +6,7 @@
 /*   By: Dana Nour <dna2@students.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 16:44:30 by Dana Nour         #+#    #+#             */
-/*   Updated: 2026/03/03 04:37:44 by Dana Nour        ###   ########.fr       */
+/*   Updated: 2026/03/14 14:17:58 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,32 @@ int	check_file(int argc, char *file_name)
 	}
 	return (0);
 }
-//still reachable and invalid read 
-//when doing line = NULL;//get_next_line(fd);
-void	count_lines(char *file_name, t_map **s_map)
+
+int	count_lines(char *file_name, t_map **s_map)
 {
 	char	*line;
 	int		fd;
 
-	//still reachable and invalid read 
-	//when doing line = NULL;//get_next_line(fd);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
+		return (0);
+	if (!(line = get_next_line(fd)))
 	{
-		free(*s_map);
-		exit(1);
+		close(fd);
+		return (0);
 	}
-	line = get_next_line(fd);
 	while (line)
 	{
 		(*s_map)->rows++;
 		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			break ;
 	}
+	free(line);
+	free(get_next_line(fd)); //check this
 	close(fd);
+	return (1);
 }
 
 int	process_line(char *line, t_map **s_map, int i)
@@ -70,32 +73,47 @@ int	process_line(char *line, t_map **s_map, int i)
 	return (1);
 }
 
+static int	fill_grid(int fd, char **grid, t_map **s_map)
+{
+	int	i;
+
+	i = -1;
+	while (++i < (*s_map)->rows)
+	{
+		grid[i] = get_next_line(fd);
+		if (!grid[i] || !process_line(grid[i], s_map, i))
+		{
+			free_grid(grid);
+			free(get_next_line(fd));
+			return (0);
+		}
+	}
+	free(get_next_line(fd));
+	grid[i] = NULL;
+	return (1);
+}
+
 char	**read_map(char *file_name, t_map **s_map)
 {
 	int		fd;
 	char	**grid;
-	int		i;
 
-	count_lines(file_name, s_map);
+	if (count_lines(file_name, s_map) == 0)
+		return (NULL);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		exit(1);
-	grid = malloc(((*s_map)->rows + 1) * sizeof(char *));
+	grid = ft_calloc(((*s_map)->rows + 1), sizeof(char *));
 	if (!grid)
 	{
-		//free still reachable when the malloc fails
 		close(fd);
-		exit(1);
+		return (NULL);
 	}
-	i = -1;
-	while (++i < (*s_map)->rows)
+	if (!fill_grid(fd, grid, s_map))
 	{
-		grid[i] = get_next_line(fd); // still reachable
-		if (!process_line(grid[i], s_map, i))
-			break ;
+		close(fd);
+		return (NULL);
 	}
-	free(get_next_line(fd));
-	grid[i] = NULL;
 	close(fd);
 	return (grid);
 }

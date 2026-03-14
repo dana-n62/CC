@@ -10,7 +10,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 GNL_DIR = ../GNL
 
 SRCS = main.c map_parsing.c map_validation.c path_validation.c\
-	graphics.c event_handler.c movement.c\
+	graphics.c event_handler.c movement.c free_functions.c\
 	$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
 OBJS = $(SRCS:.c=.o)
 NAME = so_long

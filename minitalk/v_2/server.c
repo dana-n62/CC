@@ -6,13 +6,13 @@
 /*   By: Dana Nour <dna2@students.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 12:41:55 by Dana Nour         #+#    #+#             */
-/*   Updated: 2026/03/08 15:46:07 by dna2             ###   ########.fr       */
+/*   Updated: 2026/03/13 21:43:00 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static char	*g_string;
+static char	*g_str;
 
 void	add_char(char c)
 {
@@ -27,18 +27,18 @@ void	add_char(char c)
 		if (!new_string)
 			sig_error();
 		while (++i < length)
-			new_string[i] = g_string[i];
+			new_string[i] = g_str[i];
 		new_string[length] = c;
 		new_string[length + 1] = '\0';
 		length++;
-		if (g_string)
-			free(g_string);
-		g_string = new_string;
+		if (g_str)
+			free(g_str);
+		g_str = new_string;
 		return ;
 	}
-	ft_printf("%s\n", g_string);
-	free(g_string);
-	g_string = NULL;
+	ft_printf("%s\n", g_str);
+	free(g_str);
+	g_str = NULL;
 	length = 0;
 }
 

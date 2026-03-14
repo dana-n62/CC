@@ -6,37 +6,23 @@
 /*   By: Dana Nour <dna2@students.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 11:11:09 by Dana Nour         #+#    #+#             */
-/*   Updated: 2026/03/08 11:12:58 by Dana Nour        ###   ########.fr       */
+/*   Updated: 2026/03/14 14:47:50 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
-void	free_imgs(t_game *s_game, void **img, int i)
-{
-	int	j;
-
-	j = 0;
-	ft_printf("Error\nFailed to load image %d\n", i);
-	while (j < 5)
-	{
-		if (img[j] && j != i)
-			mlx_destroy_image(s_game->mlx, img[j]);
-		j++;
-	}
-}
 
 int	mlx_start(t_game *s_game, int rows, int cols)
 {
 	int	width;
 	int	height;
 
-	s_game->mlx = mlx_init(); // leaks , sigv, invalid read
+	s_game->mlx = mlx_init();
 	if (!s_game->mlx)
 		return (0);
 	width = cols * TILE_SIZE;
 	height = rows * TILE_SIZE;
-	s_game->win_mlx = mlx_new_window(s_game->mlx, width, height, "new game");// leaks , sigv, invalid read
+	s_game->win_mlx = mlx_new_window(s_game->mlx, width, height, "new game");
 	if (!s_game->win_mlx)
 		return (0);
 	return (1);
@@ -71,32 +57,43 @@ int	load_images(t_game *s_game)
 	return (1);
 }
 
+static void	render_tile(t_game *g, int x, int y)
+{
+	int	px;
+	int	py;
+	int	i;
+
+	px = y * TILE_SIZE;
+	py = x * TILE_SIZE;
+	i = 0;
+	if (g->current->map[x][y] == '1')
+		i = mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.w, px, py);
+	else if (x == g->player_current.x && y == g->player_current.y)
+		i = mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.p, px, py);
+	else if (g->current->map[x][y] == 'C')
+		i = mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.c, px, py);
+	else if (g->current->map[x][y] == 'E')
+		i = mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.e, px, py);
+	else
+		i = mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.f, px, py);
+	if (i < 0)
+	{
+		ft_printf("Error\nFailed to render tile at (%d, %d)\n", x, y);
+		close_window(g);
+	}
+}
+
 void	render_map(t_game *g)
 {
 	int	x;
 	int	y;
-	int	px;
-	int	py;
 
 	x = -1;
 	while (++x < g->current->rows)
 	{
 		y = -1;
 		while (++y < g->current->cols)
-		{
-			px = y * TILE_SIZE;
-			py = x * TILE_SIZE;
-			if (g->current->map[x][y] == '1')
-				mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.w, px, py);
-			else if (x == g->player_current.x && y == g->player_current.y)
-				mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.p, px, py);
-			else if (g->current->map[x][y] == 'C')
-				mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.c, px, py);
-			else if (g->current->map[x][y] == 'E')
-				mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.e, px, py);
-			else
-				mlx_put_image_to_window(g->mlx, g->win_mlx, g->game.f, px, py);
-		}
+			render_tile(g, x, y);
 	}
 }
 

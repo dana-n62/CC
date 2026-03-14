@@ -6,7 +6,7 @@
 /*   By: Dana Nour <dna2@students.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:25:59 by Dana Nour         #+#    #+#             */
-/*   Updated: 2026/03/03 04:17:54 by Dana Nour        ###   ########.fr       */
+/*   Updated: 2026/03/14 14:20:58 by Dana Nour        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,7 @@ int			key_press(int key_press, void *param);
 void		move_player(t_game *s_game, int keycode);
 int			can_move(t_game *s_game, int x, int y);
 void		free_imgs(t_game *s_game, void **img, int i);
+void		exit_map(t_map *map);
+void		free_grid(char **grid);
+void		start_cleanup(t_game **s_game, t_map **s_map);
 #endif
